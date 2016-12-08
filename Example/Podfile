@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'OTAdaptiveResolution_Example' do
+  pod 'OTAdaptiveResolution', :path => '../'
+
+  target 'OTAdaptiveResolution_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
