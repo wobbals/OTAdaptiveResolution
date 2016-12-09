@@ -1,4 +1,3 @@
-use_frameworks!
 
 target 'OTAdaptiveResolution_Example' do
   pod 'OTAdaptiveResolution', :path => '../'
