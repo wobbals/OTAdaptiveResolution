@@ -9,6 +9,9 @@
 #ifndef OTAdaptiveResolution_h
 #define OTAdaptiveResolution_h
 
-#define ADAPTIVE_RESOLUTION_SIGNAL_TYPE @"OTAdaptiveResolution"
+#import "OTAdaptiveSubscriber.h"
+#import "OTAdaptivePublisher.h"
+
+extern NSString* const kOTAdaptiveResolutionSignalType;
 
 #endif /* OTAdaptiveResolution_h */

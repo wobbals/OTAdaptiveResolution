@@ -31,8 +31,8 @@
 
 - (bool)myStreamIsActive
 {
-    for (OTStream* stream in self.session.streams) {
-        if ([stream.streamId isEqualToString:self.stream.streamId]) {
+    for (NSString* streamId in [self.session.streams allKeys]) {
+        if ([streamId isEqualToString:self.stream.streamId]) {
             return YES;
         }
     }
@@ -63,9 +63,11 @@
         return;
     }
 
+    CGSize currentRenderingSize = self.view.frame.size;
+
     // Send signal to preferred resolution
     if (!CGSizeEqualToSize(self.view.frame.size, self.preferredResolution)) {
-        [self setPreferredResolution:self.view.frame.size];
+        [self setPreferredResolution:currentRenderingSize];
     }
 
     if (!CGSizeEqualToSize(self.view.frame.size, _lastAnnouncedSize)) {
@@ -75,9 +77,9 @@
         NSString* signal =
         [NSString stringWithFormat:
          @"{\"subscriberId\":\"%@\",\"width\":\"%d\",\"height\":\"%d\"}",
-         self.session.connection.connectionId, self.view.frame.size.width,
-         self.view.frame.size.height];
-        [self.session signalWithType:ADAPTIVE_RESOLUTION_SIGNAL_TYPE
+         self.session.connection.connectionId, (int)currentRenderingSize.width,
+         (int)currentRenderingSize.height];
+        [self.session signalWithType:kOTAdaptiveResolutionSignalType
                               string:signal
                           connection:self.stream.connection
                                error:&error];
